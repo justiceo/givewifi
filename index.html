@@ -4,20 +4,19 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>GiveWifi</title>
-  <meta name="description"
-    content="Free, Fast and Unlimited Internet Access for Learning Centers">
+  <title>Give The Gift of Free Wifi</title>
+  <meta name="description" content="Free, Fast and Unlimited Internet Access for Learning Centers">
   <meta name="keywords"
     content="free internet, free browsing, software, bootcamp, ux design, programming, school, data science, coding program">
   <link rel="canonical" href="https://givewifi.org/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="copyright" content="2024, GiveWifi">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GiveWifi">
+  <meta name="twitter:title" content="Give Wifi">
 
   <meta property="og:url" content="https://givewifi.org/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GiveWifi">
+  <meta property="og:title" content="Give Wifi">
   <!-- favicon -->
   <link rel="shortcut icon" href="https://givewifi.org/favicon.png" type="image/vnd.microsoft.icon">
   <link rel="icon" href="https://givewifi.org/favicon.png" type="image/vnd.microsoft.icon">
@@ -42,7 +41,13 @@
         </a>
 
         <div class="links">
-          <a href="mailto:hello@" style="color: skyblue">Contact us</a>
+          <span id="contact-button" style="color: rgb(76, 136, 214)">Contact us</span>
+          <script>
+            document.getElementById('contact-button').addEventListener('click', function () {
+              const el = document.getElementById('contact-button');
+              el.innerHTML = 'support@givewifi.org';
+            });
+          </script>
         </div>
       </div>
 
@@ -56,19 +61,30 @@
 
                 <div class="splash-page-heading">
                   <div class="badge puple">
-                  Launching Fall 2024
-                    </div>
+                    Launching Fall 2024
+                  </div>
                   <h1>
                     Give Techie Learners Free, Fast and Unlimited Internet
                   </h1>
-                  <p>For just $20, you can ensure that a tech hub serving up to 70 learners has free, fast, and unlimited internet access for an entire month.
-                     </p>
-                    
-                  <p>
-                    <input type="text" placeholder="Enter your name" class="txt-input">
-                    <input type="email" placeholder="Enter your email" class="txt-input">
+                  <p>For just $20, you can ensure that a tech hub serving up to 70 learners has free, fast, and
+                    unlimited internet access for an entire month.
                   </p>
-                  <a href="mailto:hello@justiceo.com" target="_blank" class="button">Pledge</a>
+
+                  <form action="https://formspree.io/f/xblregdr" method="post">
+                    <p>
+                      <input id="full-name" type="text" placeholder="Enter your name" class="txt-input" required>
+                      <input id="user-email" type="email" placeholder="Enter your email" class="txt-input" required>
+                    </p>
+
+                    <p>
+                      <input type="text" placeholder="Social media links" class="txt-input" required>
+                      <input type="text" placeholder="Phone number" class="txt-input" required>
+                    </p>
+                    <p>
+                      <textarea placeholder="Your pledge" required></textarea>
+                    </p>
+                    <button class="button" type="submit">Pledge</button>
+                  </form>
                 </div>
 
               </div>
@@ -77,7 +93,7 @@
           </div>
 
           <div class="copyright">
-            © 2024 GiveWifi  <a href="#">How it works</a>
+            © 2024 GiveWifi <a href="#">How it works</a>
           </div>
         </div>
       </div>
@@ -95,16 +111,17 @@
     </div>
 
     <div class="copyright mobile">
-      © 2024 GiveWifi  <a href="#">How it works</a>
+      © 2024 GiveWifi <a href="#">How it works</a>
     </div>
 
   </div>
 
 
   <style>
-    input.txt-input {
+    input.txt-input,
+    textarea {
       padding: 8px;
-      margin: 5px 0;
+      margin: 0px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
