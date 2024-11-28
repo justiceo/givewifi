@@ -469,7 +469,7 @@
           // Redirect to the generated invoice link
           window.open(data.invoiceUrl, '_blank').focus();
         } else {
-          alert('Error creating invoice: ' + data.message);
+          alert('Error creating invoice: ' + data.error);
         }
       } catch (error) {
         console.error('Error:', error);
