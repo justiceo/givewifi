@@ -25,6 +25,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
   <link href="./fonts.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- css -->
   <link rel="stylesheet" href="./styles.css" type="text/css">
 
@@ -66,15 +68,17 @@
                       works</a>.
                   </p>
 
-                  <form action="https://formspree.io/f/xblregdr" method="post">
+                  <form>
                     <p>
                       <input name="full-name" type="text" placeholder="Enter your name" class="txt-input" required>
                       <input name="user-email" type="email" placeholder="Enter your email" class="txt-input" required>
                     </p>
-                    <p>
-                      <textarea name="pledge" placeholder="Enter your pledge" required></textarea>
-                    </p>
-                    <button class="button" type="submit">Pledge</button>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">$</span>
+                      <input name="amount" type="number" class="form-control" placeholder="20"
+                        aria-label="Donation amount" style="flex: 0.2 1 auto;" value="50" min="20">
+                    </div>
+                    <button id="pledge" class="button" type="button">Pledge</button>
                   </form>
                 </div>
 
@@ -95,7 +99,9 @@
                     with a fast, free and unlimited-data satellite internet.
                   </p>
                   <p>
-                    A monthly subscription for satellite internet <a href="https://drive.google.com/file/d/1czXm88lOsu3VL7iL80HY0GL1T4X-CmWT/view?usp=sharing">costs ₦35,000</a>, which translates to about $20. We work
+                    A monthly subscription for satellite internet <a
+                      href="https://drive.google.com/file/d/1czXm88lOsu3VL7iL80HY0GL1T4X-CmWT/view?usp=sharing">costs
+                      ₦35,000</a>, which translates to about $20. We work
                     with tech hubs that have 50 or more learners to install and run a satellite internet service.
                   </p>
 
@@ -435,7 +441,44 @@
 
     // Call the function on page load to handle direct access with the fragment
     toggleVisibility();
+
+    // Pledge button.
+    document.getElementById("pledge").addEventListener('click', async function () {
+      const email = document.getElementsByName("user-email")[0].value;
+      const name = document.getElementsByName("full-name")[0].value;
+      const amount = document.getElementsByName("amount")[0].value;
+
+      if (!email || !name || !amount) {
+        return;
+      }
+
+      try {
+        // Call the backend to create the Stripe invoice link
+        const response = await fetch('https://createstripeinvoice-554259379361.us-central1.run.app', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, name, amount })
+        });
+
+        const data = await response.json();
+        console.log("invoice response: ", data);
+
+        if (response.ok && data.invoiceUrl) {
+          // Redirect to the generated invoice link
+          window.open(data.invoiceUrl, '_blank').focus();
+        } else {
+          alert('Error creating invoice: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
